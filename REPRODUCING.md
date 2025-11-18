@@ -1,19 +1,18 @@
+# Information
+
 This [Code Ocean](https://codeocean.com) Compute Capsule will allow you to reproduce the results published by the author on your local machine<sup>1</sup>. Follow the instructions below, or consult [our knowledge base](https://help.codeocean.com/user-manual/sharing-and-finding-published-capsules/exporting-capsules-and-reproducing-results-on-your-local-machine) for more information. Don't hesitate to reach out to [Support](mailto:support@codeocean.com) if you have any questions.
 
 <sup>1</sup> You may need access to additional hardware and/or software licenses.
 
-# Prerequisites
+## Prerequisites
 
 - [Docker Community Edition (CE)](https://www.docker.com/community-edition)
 - [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#gpu) for code that leverages the GPU
 - MATLAB/MOSEK/Stata licenses where applicable
 
-# Instructions
+### Note: Git LFS migration
 
-
-## Note: Git LFS migration (2025-11-18)
-
-Recent repository maintenance: large binary artifacts (environment wheels, prebuilt
+Large binary artifacts (environment wheels, prebuilt
 packages, model checkpoints and generated `results/` outputs) were migrated to
 Git LFS and the rewritten history was force-pushed to the `origin` remote.
 
@@ -26,9 +25,12 @@ Git LFS and the rewritten history was force-pushed to the `origin` remote.
   original history.
 
 If you have a local clone, update it by either re-cloning or resetting your
-branches to the rewritten history:
+branches to the rewritten history.
+
+## Instructions
 
 Cleanest (recommended):
+
 ```powershell
 git clone git@github.com:abumusasakib/VisionXAI-ModelTesting.git
 cd VisionXAI-ModelTesting
@@ -37,18 +39,12 @@ git lfs pull
 
 If you prefer to update an existing local clone (WARNING: will overwrite local
 changes):
+
 ```powershell
 git fetch origin --all
 git reset --hard origin/master
 git lfs pull
 ```
-
-If you need the original un-migrated history it is preserved on the remote as
-`backup/autocommit-20251118-081733` — do not force-push that branch unless you
-intend to rewrite it.
-
-If you have questions or need help restoring local branches, tell me which
-branch/commit you want to recover and I can provide exact commands.
 
 ## The computational environment (Docker image)
 
@@ -57,6 +53,7 @@ This capsule is private and its environment cannot be downloaded at this time. Y
 > If there's any software requiring a license that needs to be run during the build stage, you'll need to make your license available. See [our knowledge base](https://help.codeocean.com/user-manual/sharing-and-finding-published-capsules/exporting-capsules-and-reproducing-results-on-your-local-machine) for more information.
 
 In your terminal, navigate to the folder where you've extracted the capsule and execute the following command:
+
 ```shell
 cd environment && docker build . --tag 39bc7692-156c-4129-8fdf-5c202779e4d8; cd ..
 ```
@@ -66,6 +63,7 @@ cd environment && docker build . --tag 39bc7692-156c-4129-8fdf-5c202779e4d8; cd 
 ## Running the capsule to reproduce the results
 
 In your terminal, navigate to the folder where you've extracted the capsule and execute the following command, adjusting parameters as needed:
+
 ```shell
 docker run --platform linux/amd64 --rm --gpus all \
   --workdir /code \

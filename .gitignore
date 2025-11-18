@@ -1,0 +1,12 @@
+# Ignore local dataset and large runtime artifacts
+data/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Local results (if you want to keep results tracked, remove this)
+results/

@@ -10,6 +10,46 @@ This [Code Ocean](https://codeocean.com) Compute Capsule will allow you to repro
 
 # Instructions
 
+
+## Note: Git LFS migration (2025-11-18)
+
+Recent repository maintenance: large binary artifacts (environment wheels, prebuilt
+packages, model checkpoints and generated `results/` outputs) were migrated to
+Git LFS and the rewritten history was force-pushed to the `origin` remote.
+
+- Why: the repository exceeded the HTTP push limits when uploading ~2.2 GiB
+  of binary data over HTTPS; moving those blobs to Git LFS makes pushes and
+  clones practical.
+- What changed: `environment/` and `results/` (and several wheel/checkpoint
+  file patterns) are now tracked by Git LFS. A backup branch
+  `backup/autocommit-20251118-081733` was preserved on the remote with the
+  original history.
+
+If you have a local clone, update it by either re-cloning or resetting your
+branches to the rewritten history:
+
+Cleanest (recommended):
+```powershell
+git clone git@github.com:abumusasakib/VisionXAI-ModelTesting.git
+cd VisionXAI-ModelTesting
+git lfs pull
+```
+
+If you prefer to update an existing local clone (WARNING: will overwrite local
+changes):
+```powershell
+git fetch origin --all
+git reset --hard origin/master
+git lfs pull
+```
+
+If you need the original un-migrated history it is preserved on the remote as
+`backup/autocommit-20251118-081733` — do not force-push that branch unless you
+intend to rewrite it.
+
+If you have questions or need help restoring local branches, tell me which
+branch/commit you want to recover and I can provide exact commands.
+
 ## The computational environment (Docker image)
 
 This capsule is private and its environment cannot be downloaded at this time. You will need to rebuild the environment locally.
